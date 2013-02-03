@@ -5,7 +5,7 @@
   "description": "Display IMDb and Rotten Tomatoes ratings for netflix movies.",
   "content_scripts": [
     {
-      "matches": ["http://movies.netflix.com/WiMovie/*"],
+      "matches": ["http://*.netflix.com/*"],
       "js": ["jquery-1.9.0.min.js", "netimdb.js"]
     }
   ]
