@@ -95,7 +95,8 @@ function newRatings(){
 
 //returns which page we are on
 function pageType(){
-	if ($("body").attr("id") == "page-WiHome" || $("body").attr("id") == "page-WiAltGenre" || $("body").attr("id") == "page-WiSimilarsByViewType"){
+	list_pages=['page-WiHome','page-WiAltGenre','page-WiSimilarsByViewType','page-Kids','page-KidsAltGenre']
+	if ($.inArray($("body").attr("id"),list_pages)){
 		return "LIST";
 	}
 	else{
