@@ -1,5 +1,5 @@
 {
-  "name": "NetImdb",
+  "name": "NetflixRatings",
   "manifest_version": 2,
   "version": "0.1",
   "description": "Display IMDb and Rotten Tomatoes ratings for netflix movies.",
