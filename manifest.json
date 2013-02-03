@@ -1,0 +1,12 @@
+{
+  "name": "NetImdb",
+  "manifest_version": 2,
+  "version": "0.1",
+  "description": "Display IMDb and Rotten Tomatoes ratings for netflix movies.",
+  "content_scripts": [
+    {
+      "matches": ["http://movies.netflix.com/WiMovie/*"],
+      "js": ["jquery-1.9.0.min.js", "netimdb.js"]
+    }
+  ]
+}
