@@ -96,7 +96,7 @@ function newRatings(){
 //returns which page we are on
 function pageType(){
 	list_pages=['page-WiHome','page-WiAltGenre','page-WiSimilarsByViewType','page-Kids','page-KidsAltGenre']
-	if ($.inArray($("body").attr("id"),list_pages)){
+	if ($.inArray($("body").attr("id"),list_pages) >= 0){
 		return "LIST";
 	}
 	else{
