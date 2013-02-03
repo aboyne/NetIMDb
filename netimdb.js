@@ -21,7 +21,7 @@ function getRating(title,year) {
 //When results are returned, this function adds them to the page
  function ajaxSuccess(result) {
 	if (result.imdbRating != undefined){
-		setResults(result.imdbRating,result.tomatoMeter	);
+		setResults(result.imdbRating,result.tomatoMeter,result.imdbID);
 	}
 	else{
 		//If the initial query contained the year but failed, we should try again without the year
@@ -41,28 +41,35 @@ function ajaxFailed(result) {
 }
 
 //This function handles adding the results to the page
-function setResults(imdb,tomato){
+function setResults(imdb,tomato,id){
 		imdbRating = imdb;
-		tomatoMeter = tomato;
+		imdbId = id;
+		if (tomato != "N/A" && tomato.indexOf('%')<0){		
+			tomatoMeter = tomato + "%";
+		}
+		else{
+			tomatoMeter = tomato;
+		}
+		
 		if ( pageType == "LIST" ){
 			//Create the div for the results
-			if($(".bobMovieHeader").children(".year").children(".ratings").length == 0){
-				$(".bobMovieHeader").children(".year").append("<div class='ratings'></div>");
+			if($(".bobMovieHeader").children(".duration").children(".ratings").length == 0){
+				$(".bobMovieHeader").children(".duration").append(" <span class='ratings'></span>");
 			}
 			
-			ratingsInfo = title=$(".bobMovieHeader").children(".year").children(".ratings");
+			ratingsInfo = title=$(".bobMovieHeader").children(".duration").children(".ratings");
 			ratingsInfo.empty();
 			
 			ratingsInfo.append("<hr>");
-			ratingsInfo.append("<div>IMDb: "+imdbRating);
-			ratingsInfo.append("<div>Rotten Tomatoes: "+tomatoMeter+"%");
+			ratingsInfo.append("<a style='font-size: 12px;' href='http://www.imdb.com/title/"+imdbId+"'>IMDb:</a> "+imdbRating+"<br>");
+			ratingsInfo.append("Rotten Tomatoes: "+tomatoMeter);
 			ratingsInfo.append("<hr>");
 		}
 		else{
 			ratingsInfo = $(".ratingsInfo");
 			ratingsInfo.append("<br>");
-			ratingsInfo.append("<div class='starbar starbar-pred stbrWrapStc clearfix'><p class='label'>IMDb: </p><span class='rating'> "+imdbRating+" </span></div>");
-			ratingsInfo.append("<div class='starbar starbar-avg stbrWrapStc clearfix'><p class='label'>Rotten Tomatoes: </p><span class='rating'> "+tomatoMeter+"% </span></div>");
+			ratingsInfo.append("<div class='starbar starbar-pred stbrWrapStc clearfix'><p class='label'>IMDb: </p><span class='rating'> "+imdbRating+"</span></div>");
+			ratingsInfo.append("<div class='starbar starbar-avg stbrWrapStc clearfix'><p class='label'>Rotten Tomatoes: </p><span class='rating'> "+tomatoMeter+"</span></div>");
 		}
 }
 
@@ -76,7 +83,7 @@ function newRatings(){
 			getRating(title,year)
 		}
 		else{
-			setResults(imdbRating,tomatoMeter);
+			setResults(imdbRating,tomatoMeter,imdbId);
 		}
 	}
 	else{
@@ -88,7 +95,7 @@ function newRatings(){
 
 //returns which page we are on
 function pageType(){
-	if ($("body").attr("id") == "page-WiHome"){
+	if ($("body").attr("id") == "page-WiHome" || $("body").attr("id") == "page-WiAltGenre"){
 		return "LIST";
 	}
 	else{
@@ -99,6 +106,7 @@ var lastTitle = "";
 var year = 0;
 var imdbRating = "Unknown";
 var tomatoMeter = "Unknown";
+var imdbId = "";
 var pageType = pageType();
 
 //Need to periodically check the page for a hovered movie if this is a list.
