@@ -44,7 +44,7 @@ function ajaxFailed(result) {
 function setResults(imdb,tomato,id){
 		imdbRating = imdb;
 		imdbId = id;
-		if (tomato != "N/A" && tomato.indexOf('%')<0){		
+		if (tomato != "Unknown" && tomato != "N/A" && tomato.indexOf('%')<0){		
 			tomatoMeter = tomato + "%";
 		}
 		else{
