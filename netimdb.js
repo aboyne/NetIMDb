@@ -37,7 +37,7 @@ function getRating(title,year) {
 
 //Handle ajax errors
 function ajaxFailed(result) {
-	addResults(undefined);
+	setResults("Unknown","Unknown");
 }
 
 //This function handles adding the results to the page
@@ -95,7 +95,7 @@ function newRatings(){
 
 //returns which page we are on
 function pageType(){
-	if ($("body").attr("id") == "page-WiHome" || $("body").attr("id") == "page-WiAltGenre"){
+	if ($("body").attr("id") == "page-WiHome" || $("body").attr("id") == "page-WiAltGenre" || $("body").attr("id") == "page-WiSimilarsByViewType"){
 		return "LIST";
 	}
 	else{
